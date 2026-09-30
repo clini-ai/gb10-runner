@@ -1,14 +1,14 @@
 FROM nvcr.io/nvidia/pytorch:25.01-py3
 
 # 1. Stub apt-get and apt so Vast's entrypoint while loop exits immediately
-RUN echo '#!/bin/sh\nexit 0' > /usr/local/bin/apt-get && \
+RUN printf '#!/bin/sh\nexit 0\n' > /usr/local/bin/apt-get && \
     chmod +x /usr/local/bin/apt-get && \
-    echo '#!/bin/sh\nexit 0' > /usr/local/bin/apt && \
+    printf '#!/bin/sh\nexit 0\n' > /usr/local/bin/apt && \
     chmod +x /usr/local/bin/apt && \
     cp /usr/bin/apt-get /usr/bin/apt-get.orig 2>/dev/null || true && \
-    echo '#!/bin/sh\nexit 0' > /usr/bin/apt-get && \
+    printf '#!/bin/sh\nexit 0\n' > /usr/bin/apt-get && \
     chmod +x /usr/bin/apt-get && \
-    echo '#!/bin/sh\nexit 0' > /usr/bin/apt && \
+    printf '#!/bin/sh\nexit 0\n' > /usr/bin/apt && \
     chmod +x /usr/bin/apt
 
 # 2. Configure SSH keys and sshd
